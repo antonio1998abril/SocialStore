@@ -9,9 +9,14 @@ function Products(token) {
     const [search,setSearch] = useState('')
     const [page, setPage] = useState(1)
     const [result, setResult] = useState(0)
-    /* find by description */
+    /* set user products */
     const [byproducts,setByProducts]=useState([])
-    
+    /* call use effect when user create delte or update something with products */
+    const [callback,setCallback]=useState(false)
+    /* EDIT */
+    const [modalOnEdit,modalsetOnEdit] =useState(false)
+    const [idProduct,setidProduct] = useState('')
+    /* EDIT */
     useEffect (()=>{
         const  getProducts = async() =>{
             const res = await axios.get(`/api/getPro?limit=${page*6}&${sort}description[regex]=${search}&title[regex]=${search}`)
@@ -19,7 +24,7 @@ function Products(token) {
             setResult(res.data.result)
         }
         getProducts()
-    },[sort,search,page])
+    },[callback,sort,search,page])
 
     useEffect(()=>{
         if(token){
@@ -31,7 +36,8 @@ function Products(token) {
         }
         getAdminP()
     }
-    },[token]) 
+    },[token,callback])
+     
     return {
         products:[products,setProducts],
         sort: [sort, setSort],
@@ -39,7 +45,11 @@ function Products(token) {
         page: [page, setPage],
         result: [result, setResult],
 
-        byuser:[byproducts,setByProducts]
+        byuser:[byproducts,setByProducts],
+        callback:[callback,setCallback],
+        /* EDIT */
+        modalOnEdit:[modalOnEdit,modalsetOnEdit],
+        idProduct:[idProduct,setidProduct]
     }
 }
 

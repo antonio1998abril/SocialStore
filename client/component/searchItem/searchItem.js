@@ -1,7 +1,13 @@
-import React from 'react'
-import {Card} from 'react-bootstrap' 
+import React, { useState } from 'react'
+import {Card,Modal,Button,Image} from 'react-bootstrap' 
+import Link from 'next/link';
 
 function searchItem({service}) {
+  const result = service.hasOwnProperty('images')
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
     return (
         <>
         {/*
@@ -31,27 +37,68 @@ function searchItem({service}) {
     </a>
   </div>
 </div> */}
+
   <div className="row">
-    <div className="col-md-12 col-lg-12">
+    <div className="col-md-12 ">
             <div className="wrimagecard wrimagecard-topimage">
               <div className="wrimagecard-topimage_header">
-                <i className="fas fa-users cardIcon"></i>
+               {/*  <i className="fas fa-users cardIcon"></i> */}
               </div>
               <div className="wrimagecard-topimage_title h-140">
-                <h2 className="h4 text-center">
-                {service.title ? service.title : service.name ? service.name :service.companyName}
-                </h2>
-                <p>Contains the list of staff members for The Big Event.</p>
+                <h4 className="text-center">
+                {service.title ? service.title : service.name ? service.name :service.companyName ? service.companyName: service.categoryName ? service.categoryName : service.portName}
+                </h4>
+                <p className="textbodysearch"> {service.description ? service.description : service.email ? service.email :service.ubication ? service.ubication: service.companyEmail ? service.companyEmail : service.description}</p>
+             
               </div>
-{/*               <div className="card-action-bar">
-                <a className="float-lg-none link">View Staff</a>
-              </div> */}
+              <div className="card-action-bar">
+{/*                 {
+                  result ? <React.Fragment>
+                  <a className="float-lg-none link">Image</a>
+                  <a className="float-lg-none link">View Staff</a>
+                  </React.Fragment> :
+                  <a className="float-lg-none link">View Staff</a>
+                } */}
+                {
+                  result ? 
+                  <React.Fragment>
+                      <Link  href="/detailSearchGlobal/[detailSearch]" as={`/detailSearchGlobal/${service._id}`}>
+                          <a className="float-lg-none link" > See</a>
+                      </Link>
+                   
+                      <a className="float-lg-none link" onClick={handleShow}>
+                         Image
+                      </a>
+
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                      >
+                        <Modal.Header closeButton>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <Image  variant="top" src={service.images.url} style={{ width: '100%' }} thumbnail fluid/>
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <Button variant="secondary" onClick={handleClose}>
+                            Close
+                          </Button>
+                        </Modal.Footer>
+                      </Modal>
+
+                  </React.Fragment> :
+                      <Link href="/detailSearchGlobal/[detailSearch]" as={`/detailSearchGlobal/${service._id}`}>
+                        <a className="float-lg-none link" > See</a>
+                      </Link>
+                }
+              </div> 
             </div>
           </div>
-
-  </div>
-  
-</div>
+        </div>
+      </div>
+      
         </>
     )
 }

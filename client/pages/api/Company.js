@@ -3,6 +3,9 @@ import axios from 'axios'
 
 function Company(token) {
     const [company,setCompany]=useState([])
+    const [callback,setCallback] = useState(false)
+    const [modalOnEdit,modalsetOnEdit] = useState(false);
+    const [idCompany, setidCompany] = useState('');
 
      useEffect(()=>{
         if(token){
@@ -14,9 +17,13 @@ function Company(token) {
         }
         getCompanies()
     }
-    },[token]) 
+    },[token,callback]) 
+
     return {
-        company:[company,setCompany]
+        company:[company,setCompany],
+        callback:[callback,setCallback],
+        modalOnEdit:[modalOnEdit,modalsetOnEdit],
+        idCompany:[idCompany,setidCompany]
     }
 }
 

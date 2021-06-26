@@ -6,18 +6,37 @@ import {Table} from 'react-bootstrap';
 import Ports from '../../component/AdminItem/Ports'
 import axios from 'axios';
 import swal from 'sweetalert';
+import Navbar from '../../component/sidebar/Navbarside';
 
 function IndexPort() {
     const state = useContext(GlobalState);
     const [islogged]= state.User.isLogged
     const [ports] = state.PortAPI.port
-            /* DELETE */
-    const deletePort=async(id)=>{
-    const deletePort=axios.delete(`/api/deletePort/${id}`)
-        await deletePort
-        swal({icon:"success",text:"GOOD!!",timer:"2000"}).then(function(){
-            window.location.href="/service/IndexPort";
-        },2000)
+    const [callback,setCallback] = state.PortAPI.callback
+    const [token] =state.token
+            /* DELETE and delete image from cloudinary*/
+    const deletePort=async(id,public_id)=>{
+        try{
+            const destroyImg =axios.post('/api/destroy',{public_id},{
+                headers:{Authorization: token}
+            })
+
+            const deletePort=axios.delete(`/api/deletePort/${id}`)
+            await deletePort
+            await destroyImg
+
+            swal({icon:"success",text:"Port Deleted",timer:"2000", buttons: false}).then(function(){
+                setCallback(!callback)
+            },1000)
+        }catch(err){
+            swal({
+                title:"¡Ups",
+                text: err.response.data.msg,
+                icon:"error",
+                button:"OK"
+            })
+        }
+
     }
 
     if(!islogged){
@@ -27,8 +46,12 @@ function IndexPort() {
         <>
         <Add/>
         <main className="content">
+            {
+                islogged && <Navbar/>
+            }
             <div className="tablesize">
-                <Table striped bordered hover variant="dark" responsive="sm">
+            <h1 className="reveal-text"><b>Ports:</b></h1>
+                <Table className="text-center table-inverse  table-borderless shadow-lg  rounded" variant="dark"   hover  size="sm" responsive="sm">
                     <thead>
                         <tr>
                         <th>Name of Port</th>

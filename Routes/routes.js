@@ -4,6 +4,7 @@ const ProductController = require ('../Controllers/product')
 const CompanyController = require ('../Controllers/company')
 const PortController = require('../Controllers/port')
 const CategoryController = require('../Controllers/category')
+const PaymentController = require('../Controllers/payment')
 const auth = require('../middleware/auth');
 
 
@@ -13,14 +14,20 @@ const routes = {
     .post('/login',UserController.login)
     .get('/logout',UserController.logout)
     .get('/refresh_token',UserController.refreshToken)
-    .get('/info',auth,UserController.getUser),
+    .get('/info',auth,UserController.getUser)
+    /* CART */
+    .patch('/addcart',auth,UserController.addCart)
+    .get('/history',auth,UserController.history),
 
     product: express.Router()
     .get('/getPro',ProductController.getProducts)
     .get('/getanything',ProductController.getanything)
     .get('/adminProducts',auth,ProductController.getAdminProducts)
     .post('/createPro',auth,ProductController.createProducts)
-    .delete('/deletePro/:id',ProductController.deleteProduct),
+    .delete('/deletePro/:id',ProductController.deleteProduct)
+    .put('/updatePro/:id',ProductController.updateProduct)
+
+    .get('/detail/:id',ProductController.finddetail),
 
     company: express.Router()
     .get('/getCompany',auth,CompanyController.getCompany)
@@ -38,7 +45,11 @@ const routes = {
     .get('/getPorts',auth,PortController.getPort)
     .post('/createPort',auth,PortController.createPort)
     .delete('/deletePort/:id',PortController.deletePort)
-    .put('/updatePort/:id',auth,PortController.updatePort)
+    .put('/updatePort/:id',auth,PortController.updatePort),
+
+    payment: express.Router()
+    .get('/payment',auth,PaymentController.getPayments)
+    .post('/payment',auth,PaymentController.createPayment)
 }
 
 module.exports = routes

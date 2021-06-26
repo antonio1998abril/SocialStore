@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome,faEdit,faGlobeAsia,faNewspaper,faCogs,faAddressBook,faList,faBuilding, faCartArrowDown,faShip } from '@fortawesome/free-solid-svg-icons'
+import { faHome,faClipboard,faGlobeAsia,faNewspaper,faCogs,faAddressBook,faList,faBuilding, faCartArrowDown,faShip } from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const SidebarData = [
@@ -19,7 +19,7 @@ export const SidebarData = [
     {
         title:'Products',
         path:'/service/indexProducts',
-        icon:<FontAwesomeIcon icon={faEdit} />,
+        icon:<FontAwesomeIcon icon={faClipboard} />,
         cName:'nav-text'
     },
     {
@@ -28,12 +28,12 @@ export const SidebarData = [
         icon:<FontAwesomeIcon icon={faShip} />,
         cName:'nav-text'
     },
-/*     {
+     {
         title:'News',
         path:'/service/News/NewsIndex',
         icon:<FontAwesomeIcon icon={faNewspaper} />,
         cName:'nav-text'
-    }, */
+    }, 
     {
         title:'Categories',
         path:'/service/IndexCategories',
@@ -45,22 +45,22 @@ export const SidebarData = [
         icon:<FontAwesomeIcon icon={faBuilding} />,
         cName:'nav-text'
     },
-/*     {
+     {
         title:'History',
-        path:'service/history/history',
+        path:'/service/history/history',
         icon:<FontAwesomeIcon icon={faCartArrowDown} />,
         cName:'nav-text'        
-    }, */
-/*     {
+    }, 
+     {
         title:'Following',
         path:'/service/following/followingIdex',
         icon:<FontAwesomeIcon icon={faAddressBook} />,
         cName:'nav-text'
-    }, */
-/*     {
+    }, 
+     {
         title:'My Perfil',
         path:'/service/perfil/configperfil',
         icon:<FontAwesomeIcon icon={faCogs} />,
         cName:'nav-text'
-    } */
+    } 
 ]

@@ -15,10 +15,9 @@ const CompanySchema = new Schema({
         type:String,
         required: false
     },
-    openService:{
-        type:Boolean,
-        default:true,
-        required: false
+    tel:{
+        type:Number,
+        default:0
     },
     companyEmail:{
         type:String,

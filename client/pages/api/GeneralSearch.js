@@ -11,8 +11,9 @@ function GeneralSearch() {
         const  getAnything = async() =>{
             try{
             const res = await axios.get(`/api/getanything?SearchG=${SearchG}`)
-            setGeneralProducts(res.data.post)
-            setResult(res.data.post)
+            setGeneralProducts(res.data.result)
+            setResult(res.data.size)
+    
             }catch(err){
                  swal({
                     title:"ERROR",

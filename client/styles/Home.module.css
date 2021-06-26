@@ -1,24 +1,15 @@
 .container {
-  min-height: 83vh;
+  min-height: 80vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
 }
-
-@media (max-width: 600px) {
-  .container{
-    min-height: 100vh;
-    }
-    .logofooter{
-      font-size: 0.8rem;
-    }
-  }
 
 .foobefore{
   border-top: 1px solid #eaeaea;
+  margin-top: 45px;
 } 
 
 .footer {
@@ -28,7 +19,6 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-
 }
 .footer a {
   display: flex;
@@ -89,7 +79,6 @@
 	align-content:center;
 	justify-content:center;
   text-align: center;
-  margin-top: -100px;
 	}
 
   .h1logo span{width:100%;position:relative}
@@ -105,3 +94,17 @@
 	}
 
 
+  @media (max-width: 600px) {
+        .container {
+          min-height: 62vh;
+          padding: 0 0.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          }
+
+          .logofooter{
+            font-size: 0.8rem;
+          }
+    }

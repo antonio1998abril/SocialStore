@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'
 
-import Link from 'next/link'
-import {Modal,Button} from 'react-bootstrap'  
+import { GlobalState } from '../GlobalState'
 function Products({products,deleteProduct}) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const state = useContext(GlobalState);
+    const [modalOnEdit,modalsetOnEdit] = state.ProductsAPI.modalOnEdit
+    const [idProduct,setidProduct] = state.ProductsAPI.idProduct
 
+    const changeState=()=>{
+        modalsetOnEdit(true)
+        setidProduct(products._id)
+    }
     return (
         <>
         <tr >
@@ -32,34 +35,22 @@ function Products({products,deleteProduct}) {
             <td>
                 <small>{products.port}</small>
             </td>
+            <td>
+                <small>{products.bycompany}</small>
+            </td>
 
             <td className="project-actions text-fixed">
-                <button  onClick={()=>deleteProduct(products._id)} className="btn btn-danger btn-flat "  >    
+                <button  onClick={()=>deleteProduct(products._id,products.images.public_id)} className="btn btn-danger btn-flat "  >    
                     <i><FontAwesomeIcon icon={faTrash} /></i> 
                 </button>
                 &nbsp;
                 <>
-{/*                 <button onClick={handleShow}  className="btn btn-warning btn-flat "  >    
-                <i><FontAwesomeIcon icon={faEdit} /></i>
-                </button> */}
+                <button onClick={changeState}  className="btn btn-warning btn-flat"  >    
+                    <i><FontAwesomeIcon icon={faEdit} /></i>
+                </button> 
                 </>  
             </td>         
         </tr>
-
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal {products.title}!</Modal.Body>
-            <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-                Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-                Save Changes
-            </Button>
-            </Modal.Footer>
-        </Modal>
         </> 
     )
 }

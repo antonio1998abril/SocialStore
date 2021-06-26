@@ -1,71 +1,108 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Modal,Button,Form, Col} from 'react-bootstrap'  
 import swal from 'sweetalert';
 import { GlobalState } from '../GlobalState';
 
+const initialState = {
+  companyName:'',
+  ubication:'',
+  companyService:'',
+  companyEmail:'',
+  port:'',
+  tel:''
+}
+
 function company() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    const initialState = {
-      companyName:'',
-      ubication:'',
-      companyService:'',
-      companyEmail:'',
+  const state = useContext(GlobalState);
+  const [company,setCompany] = useState(initialState);
+  const [token] = state.token
+  const [onEdit,setOnEdit] =useState(false);
+  const [callback,setCallback]=state.CompanyAPI.callback
+  const [idEditCompany,setidCompany] =  state.CompanyAPI.idCompany
+  const [modalOnEdit,modalsetOnEdit] = state.CompanyAPI.modalOnEdit
+  const [companies] = state.CompanyAPI.company
+  const [ports] = state.PortAPI.port
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
+  const handleClose=()=>{
+    setOnEdit(false)
+    setShow(false);
+    setCompany(initialState)
+    modalsetOnEdit(false)
+    setidCompany('')
+  }
+
+  useEffect(()=>{
+    if(idEditCompany){
+        setOnEdit(true)
+        companies.forEach(company=>{
+            if(company._id === idEditCompany) {
+                setCompany(company)
+                setShow(true);
+            }
+        })
+    }else{
+        setOnEdit(false)
+        setCompany(initialState)
     }
-
-    const [onEdit,setOnEdit] =useState(false);
-    const state = useContext(GlobalState);
-    const [company,setCompany] = useState(initialState);
-    const [token] = state.token
+},[idEditCompany,companies])
 
 
-    const handleChangeInput=e=>{
-      const {name,value}=e.target
-        setCompany({...company,[name]:value})
-      }
+  const handleChangeInput=e=>{
+    const {name,value}=e.target
+      setCompany({...company,[name]:value})
+  }
 
     const handleSubmit=async e=>{
         e.preventDefault()
         try{
-    /*             if (!images) return alert("No image Upload") */
-  
             if(onEdit){
-    /*                 await axios.put(`/api/products/${product._id}`,{...product,images},{
-                    headers:{Authorization:token}
-                }) */
+              await axios.put(`/api/CompanyUp/${company._id}`,{...company},{
+                  headers:{Authorization:token}
+              }) 
+              swal({icon:"success",text:`You have Updated ${company.companyName}`,timer:"2000",buttons: false});
             }else{
                 await axios.post('/api/createCompany',{...company},{
                     headers:{Authorization:token}
                 })
-                swal({icon:"success",text:"GOOD!!",timer:"2000"}).then(function(){
-                  window.location.href="/service/IndexCompany";
-              },2000)
+                swal({icon:"success",text:`You have Created ${company.companyName}`,timer:"2000",buttons: false});
             }
+            setOnEdit(false)
+            setShow(false);
+            setCompany(initialState)
+            modalsetOnEdit(false)
+            setidCompany('')
+            setCallback(!callback)
   
         }catch(err){
-          alert(err.response.data.msg)
-  
+          swal({
+            title:"¡Ups",
+            text: err.response.data.msg,
+            icon:"error",
+            button:"OK"
+          })
         }
     }
 
     return (
 <>
         <div className="frame">
-            <div className="hex-outer h1"></div>
-            <div className="hex-outer h2"></div>
-            <div className="hex-outer h3"></div>
-            <div className="hex-inner h1"></div>
-            <div className="hex-inner h2"></div>
-            <div className="hex-inner h3"></div>
+            <div className="hex-outer h1 shadow"></div>
+            <div className="hex-outer h2 shadow"></div>
+            <div className="hex-outer h3 shadow"></div>
+            <div className="hex-inner h1 shadow"></div>
+            <div className="hex-inner h2 shadow"></div>
+            <div className="hex-inner h3 shadow"></div>
             <div className="label">
             <a onClick={handleShow} > +</a>
             </div>
         </div>
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create a New Company</Modal.Title>
+          <Modal.Title>{onEdit ? `Update` : "Create"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -92,23 +129,46 @@ function company() {
                     />
                     </Form.Group>
 
-
                     <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control name="companyEmail" type="email" placeholder="Email"
                          value={company.companyEmail} onChange={handleChangeInput}
                     />
                     </Form.Group>
+
+                    <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Label>Telephone</Form.Label>
+                    <Form.Control name="tel" type="tel" placeholder="Tel"
+                         value={company.tel} onChange={handleChangeInput}
+                    />
+                    </Form.Group>
                 </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formGridPort">
+                    <Form.Label>Port</Form.Label>
+                    <Form.Control name="port" as="select" value={company.port} onChange={handleChangeInput} >
+                        <option value="">Choose...</option>
+                        {
+                            ports.map(port =>(
+                                <option value={port.portName} key={port._id}>
+                                    {port.portName}
+                                </option>
+                            ))
+                        }
+                    </Form.Control>
+                    </Form.Group>
+                </Form.Row>
+
+                <Button variant="primary" type="submit" >
+                    {onEdit ? "Update" : "Create"}
+                  </Button>
             </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit} type="submit">
-            Save Changes
-          </Button>
+
         </Modal.Footer>
       </Modal>
         </>

@@ -40,7 +40,11 @@ const UserSchema = new Schema({
     follows:[{
         type:Schema.Types.ObjectId,
         ref:'follow'
-    }]
+    }],
+    cart:{
+        type: Array,
+        default: []
+    } 
 })
 
 module.exports = UserSchema

@@ -14,12 +14,14 @@ const controller = {
         if(category) return res.json('ERROR')
 
         const newCateogry = new Category({categoryName,user:req.user.id})
-        await newCateogry.save().then(result =>{
+        await newCateogry.save().then(() =>{
             res.json({msg:"Created a new Category"})
         }).catch(next)
     },
     deleteCategory: async(req,res,next) => {
-        const products = await Products.findOne({category: req.params.id})
+        const  categoryName = await Category.findById(req.params.id).select('categoryName');
+
+        const products = await Products.findOne({category: categoryName.categoryName})
         if(products) return res.status(302).json({msg: "Please delete all products with the same relationship."})
 
         await Category.findByIdAndDelete(req.params.id).then(()=>{

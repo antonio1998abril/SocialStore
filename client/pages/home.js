@@ -14,7 +14,6 @@ function home() {
     if(!islogged) {return <Login/>}
     
     return (
-        <div>
             <main className="content">
                 {
                     islogged && <Navbar/>
@@ -29,7 +28,6 @@ function home() {
                
                 </div>  
             </main>
-        </div>
     )
 }
 

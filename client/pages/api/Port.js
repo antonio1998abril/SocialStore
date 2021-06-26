@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react'
 function Port(token) {
     const [port,setPort]=useState([])
 
+    const [callback,setCallback] = useState(false);
+    const [modalOnEdit,modalsetOnEdit] = useState(false);
+    const [idPort,setidPort] = useState('');
+
     useEffect(()=>{
         if(token){
         const getPorts =async()=>{
@@ -14,10 +18,13 @@ function Port(token) {
         }
         getPorts()
     }
-    },[token]) 
+    },[token,callback]) 
 
     return {
-        port:[port,setPort]
+        port:[port,setPort],
+        callback:[callback,setCallback],
+        modalOnEdit:[modalOnEdit,modalsetOnEdit],
+        idPort:[idPort,setidPort]
     }
 }
 

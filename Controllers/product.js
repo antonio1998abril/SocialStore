@@ -2,6 +2,9 @@ const Product = require('../Models/ProductSchema')
 const User = require('../Models/UserSchema')
 const Company = require('../Models/CompanySchema')
 
+const Port = require ('../Models/PortSchema')
+const Categories = require ('../Models/CategorySchema')
+
 class APIfeature{
     constructor(query,queryString){
         this.query=query;
@@ -65,37 +68,64 @@ const controller = {
         const search = req.query.SearchG
         const searchnumber = Number(search)
 
-        Product.find({ $or:[{title:{$regex:search,$options:'i'}},{description:{$regex:search,$options:'i'}}, 
+        function getsize(result){
+            resultSize = Object.keys(result)
+            return resultSize.length
+        }
+        
+       await  Product.find({ $or:[{title:{$regex:search,$options:'i'}},{description:{$regex:search,$options:'i'}}, 
           /*  {price: {$gte:searchnumber}} */{content:{$regex:search,$options:'i'}} 
         ]})
         .lean()
-        .populate({path:'user',model:'user'}).then((post)=>{
-            if(!post || 0 === post.length){
+        .populate({path:'user',model:'user'}).then((result)=>{
+            if(!result || 0 === result.length){
                 User.find({$or:[{name:{$regex:search, $options:'i'}}, {ocupation:{$regex:search,$options:'i'}},
                     {email:{$regex:search,$options:'i'}}, {service:{$regex:search,$options:'i'}},
                     {tel:{$regex:search,$options:'i'}}
             ]})
             .lean()
-                .then(post=>{
-                    if(!post || 0 === post.length){
+                .then(result=>{
+                    if(!result || 0 === result.length){
                         Company.find({ $or:[{companyName:{$regex:search,$options:'i'}},{ubication:{$regex:search,$options:'i'}}, 
                         {companyEmail:{$regex:search,$options:'i'}}  
                         ]})
                         .lean()
-                        .then(post =>{
-                            if(!post || 0 === post.length){
-                                return res.status(302).json({msg:"we can't find anything"})
-
+                        .then(result =>{
+                            if(!result || 0 === result.length){
+                                 Port.find({ $or:[{portName:{$regex:search,$options:'i'}},{description:{$regex:search,$options:'i'}}, 
+                                {ubication:{$regex:search,$options:'i'}}  
+                                ]})
+                                .lean()
+                                .then(result =>{
+                                    if(!result || 0 === result.length){
+                                        Categories.find({portName:{$regex:search,$options:'i'}})
+                                        .lean()
+                                        .then(result => {
+                                            if(!result || 0 === result.length){
+                                                return res.status(302).json({msg:"we can't find anything"}) 
+                                            }else{
+                                                return res.json({
+                                                    result,
+                                                })
+                                            }
+                                        })
+                                    }else{
+                                        return res.json({result})
+                                    }
+                                }) 
                             }else{
-                                return res.json({post})
+                                return res.json({result})
                             }
                         })
                     }else{
-                        return res.json({post})
+                        return res.json({result})
                     }
                 })
             }else{
-                return res.json({post})
+                return res.json({
+                    result,
+                    size:getsize(result)
+                })
             }
         })
     },
@@ -120,22 +150,53 @@ const controller = {
     },
 
     createProducts: async(req,res,next) => {
-        const {title,price,description,content,category,port,bycompany} = req.body;
+        const {title,price,description,content,category,port,bycompany,images} = req.body;
         const product = await Product.findOne({title})
-            if (product) return res.status(400).json({msg:"This product already exists."})
         
+        if (product) return res.status(400).json({msg:"This product already exists."})
+        if (!title || !price  || !description  || !content || !images) return res.status(302).json({msg:"Complete all fields correctly."})
+
         const newProduct = new Product({
-            price,title:title.toLowerCase(),description,content,category,port,bycompany,byuser:req.user.id
+            price,title:title.toLowerCase(),description,content,category,port,bycompany,byuser:req.user.id,images
             })
+
             await newProduct.save().then(function(){
                 res.json({msg:"created a new product"})
-            }).catch(next)
+            })
     },
     deleteProduct: async(req,res,next) => {
         await Product.findByIdAndDelete(req.params.id).then(() =>{
             res.json({msg:"deleted"})
         }).catch(next)
-           
+    },
+
+    updateProduct:async(req,res) => {
+        const {title,price,description,content,images,category,port,bycompany}=req.body;
+        if (!title || !price  || !description  || !content || !images) return res.status(302).json({msg:"Complete all fields correctly."})
+        
+        await Product.findByIdAndUpdate({_id:req.params.id},{
+            title:title.toLowerCase(),price,description,content,images,category,port,bycompany
+        })
+        res.json({msg:"Updated prodct"})
+    },
+
+    finddetail:async(req,res) => {
+        try{
+            const ProductResult = await Product.findById({_id:req.params.id})
+        const UserResult = await  User.findById({_id:req.params.id})
+        const CompanyResult = await  Company.findById({_id:req.params.id})
+        const PortResult = await Port.findById({_id:req.params.id})
+        const CategoryResult = await Categories.findById({_id:req.params.id})
+
+        return (ProductResult ? res.json(ProductResult) : UserResult ? res.json(UserResult) :
+                CompanyResult ? res.json(CompanyResult) : PortResult ? res.json(PortResult) :
+                CategoryResult ?res.json(CategoryResult) : res.status(302).json({msg:"!UPS, something was wrong"})
+        
+        );
+        }catch(err){
+            return res.status(302).json({msg:"!UPS, something was wrong"})
+        }
+        
     }
 }
 module.exports = controller

@@ -33,7 +33,19 @@
     -webkit-transform: translateY(300%);
     -ms-transform: translateY(300%);
     transform: translateY(300%);
+    margin-top: 15px;
 }
+
+ .icon-toggle:hover {
+    transition: 1.5s;
+    transform: rotateY(180deg);
+    -webkit-transform: translateY(250%);
+    -ms-transform: translateY(250%);
+}
+
+
+  /* ********************************* */
+
 
 @media (max-width: 980px) {
     .arrow{
@@ -53,8 +65,8 @@
     left: -100%; 
     transition: 850ms;
     z-index: 999;
-    
 }
+
 .nav-menu.active {
     left:0;
     transition: 350ms;
@@ -66,18 +78,18 @@
     align-items: center;
     padding: 8px 0px 8px 16px;
     list-style: none;
-    height: 60px;
+    height: 50px;
  
 }
 .nav-text a{
     text-decoration: none!important;
     color:white;
-    font-size: 18px;
+    font-size: 16px;
     width: 95%;
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 16px;
+    padding: 15px;
     border-radius: 4px;
 }
 .nav-text a:hover {

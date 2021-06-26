@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css'
 import SearchComponent from '../component/Search'
 
 
-export default function Home() {
+function Home() {
   return (
     <div className={styles.container}>
       <main >
@@ -14,7 +14,7 @@ export default function Home() {
     
   )
 }
-
+export default Home
 
 /* 
  export const getServerSideProps = function () { 

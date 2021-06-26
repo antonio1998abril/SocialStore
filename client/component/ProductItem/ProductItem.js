@@ -6,7 +6,7 @@ function ProductItem({product}) {
         <>
         <div className="product_card">
         <Card style={{ width: '16rem' }}>
-            <Card.Img variant="top" src="https://static.dw.com/image/53823423_101.jpg" />
+            <Card.Img variant="top" src={product.images.url} />
             <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>
@@ -18,10 +18,10 @@ function ProductItem({product}) {
                 <ListGroupItem>{product.content}</ListGroupItem>
                 <ListGroupItem> <b>Sold:</b>&nbsp;{product.sold}&nbsp; <b>Category: </b>&nbsp;{product.category}</ListGroupItem>
             </ListGroup>
-{/*             <Card.Body>
+             <Card.Body>
             <Card.Link href="#"> <Button variant="warning">Buy</Button></Card.Link>
                 <Card.Link href="#"> <Button variant="dark">review</Button></Card.Link>
-            </Card.Body> */}
+            </Card.Body> 
         </Card>        
         </div>    
         </>

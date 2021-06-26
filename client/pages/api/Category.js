@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 
 function Category(token) {
     const [categories,setCategories] = useState([])
+    const [callback,setCallback] = useState(false);
+    const [modalOnEdit,modalsetOnEdit] = useState(false);
+    const [idCategory,setidCategory] = useState('');
 
     useEffect(()=>{
         if (token){
@@ -14,10 +17,13 @@ function Category(token) {
             }
             getCategories()
         }
-    },[token])
+    },[token,callback])
 
     return {
-        category:[categories,setCategories]
+        category:[categories,setCategories],
+        callback:[callback,setCallback],
+        modalOnEdit:[modalOnEdit,modalsetOnEdit],
+        idCategory:[idCategory,setidCategory]
     } 
 }
 

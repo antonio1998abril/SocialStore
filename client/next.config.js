@@ -2,70 +2,93 @@ module.exports = {
     async rewrites() {
         return [{
                 source: '/api/register',
-                destination: 'https://magostore.herokuapp.com/api/register'
+                destination: 'http://localhost:5000/api/register'
             },{
                 source:'/api/refresh_token',
-                destination:'https://magostore.herokuapp.com/refresh_token'
+                destination:'http://localhost:5000/api/refresh_token'
             },{
                 source:'/api/info',
-                destination:'https://magostore.herokuapp.com/api/info'
+                destination:'http://localhost:5000/api/info'
             },{
                 source:'/api/login',
-                destination:'https://magostore.herokuapp.com/api/login'
+                destination:'http://localhost:5000/api/login'
             },{
                 source:'/api/logout',
-                destination:'https://magostore.herokuapp.com/api/logout'
+                destination:'http://localhost:5000/api/logout'
             },{
                 source:'/api/getPro',
-                destination:'https://magostore.herokuapp.com/api/getPro'
+                destination:'http://localhost:5000/api/getPro'
+            },{
+                source:'/api/detail/:id',
+                destination:'http://localhost:5000/api/detail/:id'
             },{
                 source:'/api/adminProducts',
-                destination:'https://magostore.herokuapp.com/api/adminProducts'
+                destination:'http://localhost:5000/api/adminProducts'
             },{
                 source:'/api/createPro',
-                destination:'https://magostore.herokuapp.com/api/createPro'
+                destination:'http://localhost:5000/api/createPro'
             },{
                 source:'/api/deletePro/:id',
-                destination:'https://magostore.herokuapp.com/api/deletePro/:id'
+                destination:'http://localhost:5000/api/deletePro/:id'
+            },{
+                source:'/api/updatePro/:id',
+                destination:'http://localhost:5000/api/updatePro/:id'
             },{
                 source:'/api/getanything',
-                destination:'https://magostore.herokuapp.com/api/getanything'
+                destination:'http://localhost:5000/api/getanything'
             }, {
                 source:'/api/getCompany',
-                destination:'https://magostore.herokuapp.com/api/getCompany'
+                destination:'http://localhost:5000/api/getCompany'
             },{
                 source:'/api/createCompany',
-                destination:'https://magostore.herokuapp.com/api/createCompany'
+                destination:'http://localhost:5000/api/createCompany'
             },{
                 source:'/api/Companyde/:id',
-                destination:'https://magostore.herokuapp.com/api/Companyde/:id'
+                destination:'http://localhost:5000/api/Companyde/:id'
             },{
                 source:'/api/CompanyUp/:id',
-                destination:'https://magostore.herokuapp.com/api/CompanyUp/:id'
+                destination:'http://localhost:5000/api/CompanyUp/:id'
             },{
                 source:'/api/getCategory',
-                destination:'https://magostore.herokuapp.com/api/getCategory'
+                destination:'http://localhost:5000/api/getCategory'
             },{
                 source:'/api/createCategory',
-                destination:'https://magostore.herokuapp.com/api/createCategory'
+                destination:'http://localhost:5000/api/createCategory'
             },{
                 source:'/api/deleteCategory/:id',
-                destination:'https://magostore.herokuapp.com/api/deleteCategory/:id'
+                destination:'http://localhost:5000/api/deleteCategory/:id'
             },{
                 source:'/api/updateCategory/:id',
-                destination:'https://magostore.herokuapp.com/api/updateCategory/:id'
+                destination:'http://localhost:5000/api/updateCategory/:id'
             },{
                 source:'/api/getPorts',
-                destination:'https://magostore.herokuapp.com/api/getPorts'
+                destination:'http://localhost:5000/api/getPorts'
             },{
                 source:'/api/createPort',
-                destination:'https://magostore.herokuapp.com/api/createPort'
+                destination:'http://localhost:5000/api/createPort'
             },{
                 source:'/api/deletePort/:id',
-                destination:'https://magostore.herokuapp.com/api/deletePort/:id'
+                destination:'http://localhost:5000/api/deletePort/:id'
             },{
                 source:'/api/updatePort/:id',
-                destination:'https://magostore.herokuapp.com//api/updatePort/:id'
+                destination:'http://localhost:5000/api/updatePort/:id'
+            },{
+                source:'/api/destroy',
+                destination:'http://localhost:5000/api/destroy'
+            },{
+                source:'/api/upload',
+                destination:'http://localhost:5000/api/upload'
+            },{
+                source:'/api/addcart',
+                destination:'http://localhost:5000/api/addcart'
+            },
+            {   
+                source:'/api/history',
+                destination:'http://localhost:5000/api/history'
+            },
+            {   
+                source:'/api/payment',
+                destination:'http://localhost:5000/api/payment'
             }
         ]
     }

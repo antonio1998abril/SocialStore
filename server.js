@@ -2,10 +2,14 @@ const express=require ('express')
 const app = express();
 require('dotenv').config()
 const cookieParser =require('cookie-parser')
+const fileUpload = require('express-fileupload');
+
+
 const Routes = require('./Routes/routes')
+const uploadRoute=require('./Routes/uploads')
 
 /* Conexion a base de datos */
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 mongoose.set('runValidators', true);
 mongoose.connect(process.env.DB, {
   useNewUrlParser : true, 
@@ -21,18 +25,23 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(cookieParser())
-/* Conexion a base de datos */
-
+/* fin del script Conexion a base de datos */
+/* Subitr archivps */^
+app.use(fileUpload({
+  useTempFiles:true
+}))
+/* ^^^^^^^^^^^^^^ */
 app.get('/', function (req, res) {
   res.send('hello world')
 })
-
 
 app.use('/api',Routes.user)
 app.use('/api',Routes.product) 
 app.use('/api',Routes.company) 
 app.use('/api',Routes.category)
 app.use('/api',Routes.port)
+app.use('/api',Routes.payment)
+app.use('/api',uploadRoute)
 
 app.use(function(err,req,res,next){
    res.json({error:err.message}) 

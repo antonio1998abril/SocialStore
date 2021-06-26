@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Modal,Button,Form,Col} from 'react-bootstrap'  
 import swal from 'sweetalert';
 import { GlobalState } from '../GlobalState';
@@ -8,16 +8,41 @@ const initialState = {
   categoryName:''
 }
 
-
 function category() {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const [onEdit,setOnEdit] =useState(false);
     const state = useContext(GlobalState);
     const [category,setCategory] = useState(initialState);
-    const [token] = state.token
+    const [token] = state.token;
+    const [onEdit,setOnEdit] =useState(false);
+
+    const [callback,setCallback]=state.CategoryAPI.callback
+    const [idEditCategory,setidCategory] =  state.CategoryAPI.idCategory
+    const [modalOnEdit,modalsetOnEdit] = state.CategoryAPI.modalOnEdit
+    const [categories] = state.CategoryAPI.category
+
+    const [show, setShow] = useState(false);
+    const handleShow = () => setShow(true);
+    const handleClose=()=>{
+      setOnEdit(false)
+      setShow(false);
+      setCategory(initialState)
+      modalsetOnEdit(false)
+      setidCategory('')
+    }
+
+    useEffect(()=>{
+      if(idEditCategory){
+          setOnEdit(true)
+          categories.forEach(category=>{
+              if(category._id === idEditCategory) {
+                  setCategory(category)
+                  setShow(true);
+              }
+          })
+      }else{
+          setOnEdit(false)
+          setCategory(initialState)
+      }
+  },[idEditCategory,categories])
 
     const handleChangeInput=e=>{
       const {name,value}=e.target
@@ -27,61 +52,70 @@ function category() {
       const handleSubmit=async e=>{
         e.preventDefault()
         try{
-    /*             if (!images) return alert("No image Upload") */
-  
             if(onEdit){
-    /*                 await axios.put(`/api/products/${product._id}`,{...product,images},{
-                    headers:{Authorization:token}
-                }) */
+                  await axios.put(`/api/updateCategory/${category._id}`,{...category},{
+                  headers:{Authorization:token}
+                })
+                swal({icon:"success",text:`You have Updated ${category.categoryName}`,timer:"2000",buttons: false});  
             }else{
                 await axios.post('/api/createCategory',{...category},{
                     headers:{Authorization:token}
                 })
-                swal({icon:"success",text:"GOOD!!",timer:"2000"}).then(function(){
-                  window.location.href="/service/indexCategories";
-              },2000)
-            }
+                swal({icon:"success",text:`You have Created ${category.categoryName}`,timer:"2000",buttons: false}); 
+              }           
+            setOnEdit(false)
+            setShow(false);
+            setCategory(initialState)
+            modalsetOnEdit(false)
+            setidCategory('')
+            setCallback(!callback)
   
         }catch(err){
-          alert(err.response.data.msg)
+          swal({
+            title:"¡Ups",
+            text: err.response.data.msg,
+            icon:"error",
+            button:"OK"
+          })
         }
     }
 
     return (
         <>
         <div className="frame">
-            <div className="hex-outer h1"></div>
-            <div className="hex-outer h2"></div>
-            <div className="hex-outer h3"></div>
-            <div className="hex-inner h1"></div>
-            <div className="hex-inner h2"></div>
-            <div className="hex-inner h3"></div>
+            <div className="hex-outer h1 shadow"></div>
+            <div className="hex-outer h2 shadow"></div>
+            <div className="hex-outer h3 shadow"></div>
+            <div className="hex-inner h1 shadow"></div>
+            <div className="hex-inner h2 shadow"></div>
+            <div className="hex-inner h3 shadow"></div>
             <div className="label">
             <a onClick={handleShow} > +</a>
             </div>
         </div>
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create a new Category</Modal.Title>
+          <Modal.Title>{onEdit ? `Update` : "Create"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Form onSubmit={handleSubmit}>
                 <Form.Row>
-                    <Form.Group as={Col} controlId="formGridEmail">
+                    <Form.Group as={Col} controlId="formGridCategory">
                     <Form.Label>Category</Form.Label>
-                    <Form.Control name="categoryName" type="category" placeholder="Category"
+                    <Form.Control name="categoryName" type="text" placeholder="Category"
                          value={category.categoryName} onChange={handleChangeInput}
                     />
                     </Form.Group>
                 </Form.Row>
+                  <Button variant="primary" type="submit" >
+                    {onEdit ? "Update" : "Create"}
+                  </Button>
             </Form>
         </Modal.Body>
+
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

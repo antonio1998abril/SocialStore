@@ -1,14 +1,13 @@
 import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import { GlobalState } from './GlobalState';
 import Link from 'next/link'
 
 function Search() {
   const state = useContext(GlobalState);
   const [SearchG, setSearchG] = state.GeneralSearchAPI.SearchG
-  
-
+ 
     return (
       <>
     <div className="container h-100">

@@ -42,7 +42,6 @@ function login() {
     }    
     return (
         <>
-        <div >
             <div className="login-container">
                 <div className="row">
                     <div className="col-md-12 login-form-2">
@@ -65,7 +64,6 @@ function login() {
                     </div>
                 </div>
             </div>
-        </div>
         </>
     )
 }

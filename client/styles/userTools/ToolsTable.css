@@ -1,14 +1,18 @@
-
-.tablesize{
-  margin-top: 300px;
-}
+  .tablesize{
+    margin-top: 300px;
+    margin-left: 20px;
+    width: 100%;
+  }
+  .inconposition{
+    font-size: 1.00em;
+    margin-right: 10px;
+  }
   .frame{
-    width: 210px;
+    width: 180px;
     height: 0px;
     margin: 0 auto;
     position: relative;
     cursor: pointer;
-    
   }
   
   .frame:hover .hex-inner{
@@ -23,10 +27,9 @@
   }
   
   .hex-outer{
-    background: #f5ce87;
+    background: #ffc14e;
     width: 210px;
     height: 120px;
-
   }
   
   .hex-inner{
@@ -62,7 +65,7 @@
   
   .label{
     position: absolute;
-    color: #f4f4f5;
+    color: #f4f4f5ef;
     font-weight: bold;
     font-size: 150px;
     left: 50px;
@@ -72,3 +75,106 @@
     text-shadow:5px 3px 3px rgb(255, 224, 137) ;
   }
 
+/* Add image */
+.upload{
+  max-width: 350px;
+  height: 350px;
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 60px;
+  position: relative;
+  top:-23px;
+  box-shadow: 0 0 5px rgb(131, 132, 133);
+}
+
+@media (max-width: 600px) {
+  .upload{
+    height: 300px;
+    width: 75%;
+    margin: 40px;
+    top:-20px;  
+  }
+}
+
+#file_up{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+#file_up::before{
+  content: "+";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top:-100px;
+  left: 0;
+  background: white;
+  color: rgb(250, 200, 107);
+  font-size: 17rem;
+  text-align: center;
+  cursor: pointer;
+  margin: auto;
+}
+#file_img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  background: white;
+}
+#file_img img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+#file_img span{
+  position: absolute;
+  top: -13px;
+  right: -13px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: 900;
+  color: crimson;
+}
+/* *** */
+
+/* TITLE OF TABLE BEGIN*/
+
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+.reveal-text {
+  position: absolute;
+  display: inline-block;
+  margin-left: 0px;
+  margin-top: -50px;
+  font-family: 'Ubuntu';
+  font-size: 2.6em;
+  color: #5a5858;
+  animation: show 2s ease-in;
+  transition: all 2s;
+}
+
+@keyframes show{
+from{
+  opacity: 0;
+              }
+to{
+  opacity: 1;
+              }
+}
+
+.reveal-text:hover, .reveal-text:focus{
+color: rgb(0, 0, 0);
+transform: scale(1.04);
+}
+
+/* TITLE OF TABLE END */

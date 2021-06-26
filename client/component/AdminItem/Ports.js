@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'
-import {Modal,Button} from 'react-bootstrap'  
+import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'  
+import { GlobalState } from '../GlobalState';
 
 function Ports({ports,deletePort}) {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const state = useContext(GlobalState);
+    const [modalOnEdit,modalsetOnEdit] = state.PortAPI.modalOnEdit
+    const [idPort,setidPort] = state.PortAPI.idPort
+
+    const changeState=()=>{
+      modalsetOnEdit(true)
+      setidPort(ports._id)
+    }
     return (
         <>
         <tr >
@@ -21,32 +26,17 @@ function Ports({ports,deletePort}) {
             </td>
 
             <td className="project-actions text-fixed">
-                <button onClick={()=>deletePort(ports._id)} className="btn btn-danger btn-flat "  >    
+                <button onClick={()=>deletePort(ports._id,ports.images.public_id)} className="btn btn-danger btn-flat "  >    
                     <i><FontAwesomeIcon icon={faTrash} /></i> 
                 </button>
                 &nbsp;
                 <>
-{/*                 <button onClick={handleShow}  className="btn btn-warning btn-flat "  >    
-                <i><FontAwesomeIcon icon={faEdit} /></i>
-                </button> */}
+                <button  onClick={changeState}  className="btn btn-warning btn-flat "  >    
+                  <i><FontAwesomeIcon icon={faEdit} /></i>
+                </button> 
                 </>  
             </td>         
         </tr>
-
-    <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal !</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
         </>
     )
 }

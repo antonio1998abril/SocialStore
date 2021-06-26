@@ -15,6 +15,9 @@ const PortSchema = new Schema({
     ubication:{
         type:String,
         required:true
+    },images:{
+        type:Object,
+        required:false
     },
     user:{
         type:Schema.Types.ObjectId,
