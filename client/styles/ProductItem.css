@@ -2,7 +2,7 @@
     overflow: hidden;
     padding: 15px;
  /*    box-shadow: 0 0 15px rgb(51, 144, 197); */
-    box-shadow: 0 0 15px rgb(131, 132, 133);
+    box-shadow: 0 0 15px rgb(172, 175, 177);
     margin:30px 0;
     position: relative;
     margin-left: 20px;
@@ -24,7 +24,9 @@
     min-height: 100vh;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+@import url(https://fonts.googleapis.com/css?family=Bungee);
 .optionItemButton{
-    font-family: 'Sigmar One';
+    font-family: 'Bungee';
 }
+
+

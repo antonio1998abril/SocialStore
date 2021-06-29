@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose ,faAngleDoubleLeft,faHome,faClipboard,faShip,faList,faBuilding,faCogs,faAddressBook,faCartArrowDown,faNewspaper,faGlobeAsia} from '@fortawesome/free-solid-svg-icons'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link'
 import { SidebarData} from './Sidebar'
+import { GlobalState } from '../GlobalState';
 
 function Navbarside() {
     const [sidebar, setSidebar]=useState(false);
     const showSidebar = () => setSidebar(!sidebar);
+    const state= useContext(GlobalState)
+    const [cart,setCart]=state.User.cart
+
     return (
         <>
           {/*   <Link href="#" >
@@ -22,12 +26,15 @@ function Navbarside() {
             <FontAwesomeIcon icon={faHome }  style={{color: "3F3F3F"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle " />
             <FontAwesomeIcon icon={faClipboard }  style={{marginLeft:"5px", color: "3F3F3F"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />
             <FontAwesomeIcon icon={faShip } style={{color: "3F3F3F"}}  inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />
-            <FontAwesomeIcon icon={faNewspaper } style={{color: "3F3F3F"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />
+           {/*  <FontAwesomeIcon icon={faNewspaper } style={{color: "3F3F3F"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" /> */}
             <FontAwesomeIcon icon={faList } style={{color: "3F3F3F"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />
             <FontAwesomeIcon icon={faBuilding } style={{color: "3F3F3F",marginLeft:"5px"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" /> 
-            <FontAwesomeIcon icon={faCartArrowDown } style={{color: "3F3F3F"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />   
-            <FontAwesomeIcon icon={faAddressBook } style={{color: "3F3F3F",marginLeft:"6px"}}  inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />
-            <FontAwesomeIcon icon={faCogs } style={{color: "3F3F3F",marginLeft:"-1px"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" />
+            <div className="cart-icon">
+              <span>{cart.length}</span>
+                <FontAwesomeIcon icon={faCartArrowDown } size = '2x'style={{color: "3F3F3F"}} inverse transform="shrink-5" onClick={showSidebar} className="icon-toggle"></FontAwesomeIcon>
+            </div>
+            {/* <FontAwesomeIcon icon={faAddressBook } style={{color: "3F3F3F",marginLeft:"6px"}}  inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" /> */}
+           {/*  <FontAwesomeIcon icon={faCogs } style={{color: "3F3F3F",marginLeft:"-1px"}} inverse transform="shrink-5" size = '2x' onClick={showSidebar} className="icon-toggle" /> */}
             
             </div>
           </div>

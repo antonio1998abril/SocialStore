@@ -1,7 +1,7 @@
 const User = require("../Models/UserSchema")
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-
+const Payments = require("../Models/PaymentSchema")
 const controller = {
     register: async (req,res,next)=>{
         const {name,lastname,service,tel,email,password,repeat} = req.body
@@ -81,7 +81,6 @@ const controller = {
             if(!user){
                 return res.status(400).json({msg:"User doesnt exist"})
             }
-            console.log("User",user)
             await User.findByIdAndUpdate({_id:req.user.id},{
                 cart:req.body.cart
             })

@@ -12,6 +12,7 @@ function User(token) {
     /* CART */
     const [cart,setCart]=useState([])
     const [history,setHistory] =useState([])
+    const [historymy,setHistorymy] =useState([])
 
     useEffect(() => {
         if(token){
@@ -54,6 +55,25 @@ function User(token) {
                 })
             }   
         }
+        /* GET HISTOYRY AND PAYMENTS */
+        useEffect(()=>{
+            if (token){
+                const getHistory =async()=>{
+                        const respaymnet= await Axios.get('/api/payment',{
+                            headers:{Authorization: token}
+                        })
+                        setHistory(respaymnet.data)
+
+                        const reshistory= await Axios.get('/api/history',{
+                            headers:{Authorization: token}
+                        })
+                        setHistorymy(reshistory.data) 
+             
+                }
+                getHistory()
+            }
+        },[token])
+        /* GET HISTOYRY AND PAYMENTS */
 
     return {
         isLogged:[isLogged,setIsLogged],
@@ -63,6 +83,7 @@ function User(token) {
         /* CART */
         cart: [cart, setCart],
         history:[history,setHistory],
+        historymy:[historymy,setHistorymy],
         addCart: addCart
     }
 }

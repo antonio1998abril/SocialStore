@@ -30,10 +30,6 @@ const paymentSchema = new Schema({
     status:{
         type: Boolean,
         default: false
-    },
-    sender: {
-        type:Schema.Types.ObjectId,
-        ref:'user'
     }
 }, {
     timestamps: true

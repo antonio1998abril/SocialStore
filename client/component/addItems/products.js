@@ -149,7 +149,6 @@ function addoption() {
             }) 
             setLoading(false)
             setImages(res.data)
-            console.log(res.data.url)
         }catch(err){
             alert(err.response.data.msg)
         }

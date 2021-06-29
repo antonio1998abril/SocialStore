@@ -2,93 +2,97 @@ module.exports = {
     async rewrites() {
         return [{
                 source: '/api/register',
-                destination: 'http://localhost:5000/api/register'
+                destination: 'https://apimagonetstore.herokuapp.com/api/register'
             },{
                 source:'/api/refresh_token',
-                destination:'http://localhost:5000/api/refresh_token'
+                destination:'https://apimagonetstore.herokuapp.com/api/refresh_token'
             },{
                 source:'/api/info',
-                destination:'http://localhost:5000/api/info'
+                destination:'https://apimagonetstore.herokuapp.com/api/info'
             },{
                 source:'/api/login',
-                destination:'http://localhost:5000/api/login'
+                destination:'https://apimagonetstore.herokuapp.com/api/login'
             },{
                 source:'/api/logout',
-                destination:'http://localhost:5000/api/logout'
+                destination:'https://apimagonetstore.herokuapp.com/api/logout'
             },{
                 source:'/api/getPro',
-                destination:'http://localhost:5000/api/getPro'
+                destination:'https://apimagonetstore.herokuapp.com/api/getPro'
             },{
                 source:'/api/detail/:id',
-                destination:'http://localhost:5000/api/detail/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/detail/:id'
             },{
                 source:'/api/adminProducts',
-                destination:'http://localhost:5000/api/adminProducts'
+                destination:'https://apimagonetstore.herokuapp.com/api/adminProducts'
             },{
                 source:'/api/createPro',
-                destination:'http://localhost:5000/api/createPro'
+                destination:'https://apimagonetstore.herokuapp.com/api/createPro'
             },{
                 source:'/api/deletePro/:id',
-                destination:'http://localhost:5000/api/deletePro/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/deletePro/:id'
             },{
                 source:'/api/updatePro/:id',
-                destination:'http://localhost:5000/api/updatePro/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/updatePro/:id'
             },{
                 source:'/api/getanything',
-                destination:'http://localhost:5000/api/getanything'
+                destination:'https://apimagonetstore.herokuapp.com/api/getanything'
             }, {
                 source:'/api/getCompany',
-                destination:'http://localhost:5000/api/getCompany'
+                destination:'https://apimagonetstore.herokuapp.com/api/getCompany'
             },{
                 source:'/api/createCompany',
-                destination:'http://localhost:5000/api/createCompany'
+                destination:'https://apimagonetstore.herokuapp.com/api/createCompany'
             },{
                 source:'/api/Companyde/:id',
-                destination:'http://localhost:5000/api/Companyde/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/Companyde/:id'
             },{
                 source:'/api/CompanyUp/:id',
-                destination:'http://localhost:5000/api/CompanyUp/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/CompanyUp/:id'
             },{
                 source:'/api/getCategory',
-                destination:'http://localhost:5000/api/getCategory'
+                destination:'https://apimagonetstore.herokuapp.com/api/getCategory'
             },{
                 source:'/api/createCategory',
-                destination:'http://localhost:5000/api/createCategory'
+                destination:'https://apimagonetstore.herokuapp.com/api/createCategory'
             },{
                 source:'/api/deleteCategory/:id',
-                destination:'http://localhost:5000/api/deleteCategory/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/deleteCategory/:id'
             },{
                 source:'/api/updateCategory/:id',
-                destination:'http://localhost:5000/api/updateCategory/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/updateCategory/:id'
             },{
                 source:'/api/getPorts',
-                destination:'http://localhost:5000/api/getPorts'
+                destination:'https://apimagonetstore.herokuapp.com/api/getPorts'
             },{
                 source:'/api/createPort',
-                destination:'http://localhost:5000/api/createPort'
+                destination:'https://apimagonetstore.herokuapp.com/api/createPort'
             },{
                 source:'/api/deletePort/:id',
-                destination:'http://localhost:5000/api/deletePort/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/deletePort/:id'
             },{
                 source:'/api/updatePort/:id',
-                destination:'http://localhost:5000/api/updatePort/:id'
+                destination:'https://apimagonetstore.herokuapp.com/api/updatePort/:id'
             },{
                 source:'/api/destroy',
-                destination:'http://localhost:5000/api/destroy'
+                destination:'https://apimagonetstore.herokuapp.com/api/destroy'
             },{
                 source:'/api/upload',
-                destination:'http://localhost:5000/api/upload'
+                destination:'https://apimagonetstore.herokuapp.com/api/upload'
             },{
                 source:'/api/addcart',
-                destination:'http://localhost:5000/api/addcart'
+                destination:'https://apimagonetstore.herokuapp.com/api/addcart'
             },
             {   
                 source:'/api/history',
-                destination:'http://localhost:5000/api/history'
+                destination:'https://apimagonetstore.herokuapp.com/api/history'
             },
             {   
                 source:'/api/payment',
-                destination:'http://localhost:5000/api/payment'
+                destination:'https://apimagonetstore.herokuapp.com/api/payment'
+            },
+            {   
+                source:'/api/paymentdone',
+                destination:'https://apimagonetstore.herokuapp.com/api/paymentdone'
             }
         ]
     }

@@ -49,7 +49,7 @@ const routes = {
 
     payment: express.Router()
     .get('/payment',auth,PaymentController.getPayments)
-    .post('/payment',auth,PaymentController.createPayment)
+    .post('/paymentdone',auth,PaymentController.createPayment)
 }
 
 module.exports = routes

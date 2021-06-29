@@ -40,10 +40,7 @@ function indexOption() {
                 })
             }
         }
-        if(!islogged){
-                return  <Login/>
-        }
-
+        if(!islogged){return  <Login/>}
     return (
         <>
         <Add/>

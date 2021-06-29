@@ -28,12 +28,12 @@ export const SidebarData = [
         icon:<FontAwesomeIcon icon={faShip} />,
         cName:'nav-text'
     },
-     {
+/*      {
         title:'News',
         path:'/service/News/NewsIndex',
         icon:<FontAwesomeIcon icon={faNewspaper} />,
         cName:'nav-text'
-    }, 
+    },  */
     {
         title:'Categories',
         path:'/service/IndexCategories',
@@ -46,21 +46,21 @@ export const SidebarData = [
         cName:'nav-text'
     },
      {
-        title:'History',
+        title:'Shop',
         path:'/service/history/history',
         icon:<FontAwesomeIcon icon={faCartArrowDown} />,
         cName:'nav-text'        
     }, 
-     {
+/*      {
         title:'Following',
         path:'/service/following/followingIdex',
         icon:<FontAwesomeIcon icon={faAddressBook} />,
         cName:'nav-text'
-    }, 
-     {
+    },  */
+/*      {
         title:'My Perfil',
         path:'/service/perfil/configperfil',
         icon:<FontAwesomeIcon icon={faCogs} />,
         cName:'nav-text'
-    } 
+    }  */
 ]
