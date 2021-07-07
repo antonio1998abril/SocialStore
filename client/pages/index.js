@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className={styles.container}>
       <main >
-      <h3 className={styles.h1logo}><span>MaGo NetStore</span></h3> 
+      <h3 className={styles.h1logo}><span>NetStore</span></h3> 
         <SearchComponent/>
       </main>
  

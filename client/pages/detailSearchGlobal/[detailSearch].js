@@ -88,10 +88,10 @@ useEffect(()=>{
                 <ListGroup.Item>  <b>Ubicacion</b>: {info.ubication}</ListGroup.Item>
             </ListGroup>
             
-{/*             <Button variant="info" type="submit" className="optionItemButton" onClick={() => addCart(info)}>
+             <Button variant="info" type="submit" className="optionItemButton" onClick={() => addCart(info)}>
                 <i><FontAwesomeIcon icon={faShoppingBag } style={{color: "white"}} inverse transform="shrink-2" size = '2x'  /></i>
                 BUY
-            </Button> */}
+            </Button> 
         </React.Fragment>
         )
     }

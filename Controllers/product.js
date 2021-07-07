@@ -98,7 +98,7 @@ const controller = {
                                 .lean()
                                 .then(result =>{
                                     if(!result || 0 === result.length){
-                                        Categories.find({portName:{$regex:search,$options:'i'}})
+                                        Categories.find({categoryName:{$regex:search,$options:'i'}})
                                         .lean()
                                         .then(result => {
                                             if(!result || 0 === result.length){
