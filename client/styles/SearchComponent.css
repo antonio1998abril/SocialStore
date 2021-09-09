@@ -1,0 +1,127 @@
+		.searchbar{
+		margin-bottom: auto;
+		margin-top: auto;
+		height: 60px;
+		background-color: #353b48;
+		border-radius: 30px;
+		padding: 10px;
+		}
+	
+		.search_input{
+		color: rgb(132, 247, 138);
+		border: 0;
+		outline: 0;
+		background: none;
+		width: 0;
+		caret-color:transparent;
+		line-height: 40px;
+		transition: width 0.4s linear;
+		}
+	
+		.searchbar:hover > .search_input{
+		padding: 0 10px;
+		width: 450px;
+		caret-color:red;
+		transition: width 0.4s linear;
+		}
+	
+		.searchbar:hover > .search_icon{
+		background: white;
+		color: #e74c3c;
+		}
+	
+		.search_icon{
+		height: 40px;
+		width: 40px;
+		float: right;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		color:rgb(255, 169, 31);
+		text-decoration:none;
+		}
+
+		@media (max-width: 600px) {
+			.searchbar:hover > .search_input{
+				width: 200px;
+				}
+	
+		}
+
+		/* BUY */
+		.history-page{
+			overflow-x: auto;
+		}
+		.history-page h2, h4{
+			text-align: center;
+			margin: 20px;
+			text-transform: uppercase;
+			letter-spacing: 1.2px;
+		}
+		.history-page table{
+			margin: auto;
+			width: 100%;
+		}
+		.history-page table,th,tr,td{
+			border: 1px solid #ddd;
+			border-collapse: collapse;
+		}
+		th, td{
+			text-align: center;
+			padding: 10px;
+			text-transform: capitalize;
+		}
+		table a{
+			color: rgb(3, 165, 206);
+		}
+		
+		.history-page img{
+			width: 70px;
+			height: 100px;
+			object-fit: cover;
+		}
+
+		.amount span{
+			color:rgba(32, 32, 32, 0.76);
+			padding: 0 20px;
+		}
+		
+		.amount button{
+			width: 40px;
+			height: 40px;
+			border:2px solid #777;
+		}
+		.delete{
+			position: absolute;
+			top: 0;
+			right: 5px;
+		}
+
+		.total {
+			width: 50%;
+		   margin:auto;
+
+		   margin-top:20px;
+		}
+		.cardI{
+			margin:auto;
+			width:40%;
+			margin-top:10px;
+			display: block;
+		}
+
+		@media (max-width: 600px) {
+			.cardI{
+			   margin:auto;
+			   width:100%;
+			   margin-top:10px;
+			   display: block;
+			   margin-left: 20px;
+		   }
+		   .total{
+			width:100%;
+			margin-left: 20px;
+		   }
+		   
+		   }

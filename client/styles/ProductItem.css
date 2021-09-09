@@ -1,0 +1,32 @@
+.product_card{
+    overflow: hidden;
+    padding: 15px;
+ /*    box-shadow: 0 0 15px rgb(51, 144, 197); */
+    box-shadow: 0 0 15px rgb(172, 175, 177);
+    margin:30px 0;
+    position: relative;
+    margin-left: 20px;
+    font-family: 'Ubuntu';
+}
+
+.items{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    justify-items: center;
+}
+
+.content{
+    width: 80%;
+    margin:1rem 10% 0 10%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Bungee);
+.optionItemButton{
+    font-family: 'Bungee';
+}
+
+
